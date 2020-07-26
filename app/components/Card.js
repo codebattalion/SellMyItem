@@ -1,9 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import colors from '../config/colors';
-import AppText from './AppText';
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
 
-const Card = ({ title, subTitle, image }) => {
+import AppText from "./AppText";
+import colors from "../config/colors";
+
+function Card({ title, subTitle, image }) {
   return (
     <View style={styles.card}>
       <Image style={styles.image} source={image} />
@@ -13,28 +14,28 @@ const Card = ({ title, subTitle, image }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   card: {
-    overflow: 'hidden',
-    borderRadius: 16,
+    borderRadius: 15,
     backgroundColor: colors.white,
     marginBottom: 20,
-  },
-  image: {
-    width: '100%',
-    height: 200,
+    overflow: "hidden",
   },
   detailsContainer: {
     padding: 20,
   },
-  title: {
-    marginBottom: 6,
+  image: {
+    width: "100%",
+    height: 200,
   },
   subTitle: {
     color: colors.secondary,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  title: {
+    marginBottom: 7,
   },
 });
 

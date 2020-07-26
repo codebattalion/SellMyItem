@@ -1,11 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useFormikContext } from 'formik';
-import AppTextInput from '../AppTextInput';
-import ErrorMessage from '../ErrorMessage';
+import React from "react";
+import { useFormikContext } from "formik";
 
-const AppFormField = ({ name, ...otherProps }) => {
+import AppTextInput from "../AppTextInput";
+import ErrorMessage from "./ErrorMessage";
+
+function AppFormField({ name, ...otherProps }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
+
   return (
     <>
       <AppTextInput
@@ -13,10 +14,9 @@ const AppFormField = ({ name, ...otherProps }) => {
         onChangeText={handleChange(name)}
         {...otherProps}
       />
-      <ErrorMessage visible={touched[name]} error={errors[name]} />
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
-};
-const styles = StyleSheet.create({});
+}
 
 export default AppFormField;
