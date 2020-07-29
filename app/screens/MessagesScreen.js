@@ -1,26 +1,21 @@
-import React, { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 
-import Screen from "../components/Screen";
-import {
-  ListItem,
-  ListItemDeleteAction,
-  ListItemSeparator,
-} from "../components/lists";
+import Screen from '../components/Screen';
+import { ListItem, ListItemDeleteAction, ListItemSeparator } from '../components/lists';
 
 const initialMessages = [
   {
     id: 1,
-    title: "Mosh Hamedani",
-    description: "Hey! Is this item still available?",
-    image: require("../assets/mosh.jpg"),
+    title: 'Mosh Hamedani',
+    description: 'Hey! Is this item still available?',
+    image: require('../assets/user.jpg'),
   },
   {
     id: 2,
-    title: "Mosh Hamedani",
-    description:
-      "I'm interested in this item. When will you be able to post it?",
-    image: require("../assets/mosh.jpg"),
+    title: 'Mosh Hamedani',
+    description: "I'm interested in this item. When will you be able to post it?",
+    image: require('../assets/user.jpg'),
   },
 ];
 
@@ -43,7 +38,7 @@ function MessagesScreen(props) {
             title={item.title}
             subTitle={item.description}
             image={item.image}
-            onPress={() => console.log("Message selected", item)}
+            onPress={() => console.log('Message selected', item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
@@ -55,9 +50,9 @@ function MessagesScreen(props) {
           setMessages([
             {
               id: 2,
-              title: "T2",
-              description: "D2",
-              image: require("../assets/mosh.jpg"),
+              title: 'T2',
+              description: 'D2',
+              image: require('../assets/user.jpg'),
             },
           ]);
         }}

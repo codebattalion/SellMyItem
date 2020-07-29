@@ -1,36 +1,37 @@
-import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React from 'react';
+import { StyleSheet, View, FlatList } from 'react-native';
 
-import { ListItem, ListItemSeparator } from "../components/lists";
-import colors from "../config/colors";
-import Icon from "../components/Icon";
-import Screen from "../components/Screen";
+import { ListItem, ListItemSeparator } from '../components/lists';
+import colors from '../config/colors';
+import Icon from '../components/Icon';
+import Screen from '../components/Screen';
 
 const menuItems = [
   {
-    title: "My Listings",
+    title: 'My Listings',
     icon: {
-      name: "format-list-bulleted",
+      name: 'format-list-bulleted',
       backgroundColor: colors.primary,
     },
   },
   {
-    title: "My Messages",
+    title: 'My Messages',
     icon: {
-      name: "email",
+      name: 'email',
       backgroundColor: colors.secondary,
     },
+    targetScreen: 'Messages',
   },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Mosh Hamedani"
-          subTitle="programmingwithmosh@gmail.com"
-          image={require("../assets/mosh.jpg")}
+          title='Mosh Hamedani'
+          subTitle='programmingwithmosh@gmail.com'
+          image={require('../assets/user.jpg')}
         />
       </View>
       <View style={styles.container}>
@@ -42,18 +43,16 @@ function AccountScreen(props) {
             <ListItem
               title={item.title}
               IconComponent={
-                <Icon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
+                <Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />
               }
+              onPress={() => navigation.navigate(item.targetScreen)}
             />
           )}
         />
       </View>
       <ListItem
-        title="Log Out"
-        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        title='Log Out'
+        IconComponent={<Icon name='logout' backgroundColor='#ffe66d' />}
       />
     </Screen>
   );
