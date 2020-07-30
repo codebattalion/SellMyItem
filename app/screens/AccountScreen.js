@@ -8,7 +8,7 @@ import Screen from '../components/Screen';
 
 const menuItems = [
   {
-    title: 'My Listings',
+    title: 'My Items',
     icon: {
       name: 'format-list-bulleted',
       backgroundColor: colors.primary,
@@ -29,8 +29,8 @@ function AccountScreen({ navigation }) {
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title='Mosh Hamedani'
-          subTitle='programmingwithmosh@gmail.com'
+          title='Vipan Preet'
+          subTitle='viphacker029@gmail.com'
           image={require('../assets/user.jpg')}
         />
       </View>

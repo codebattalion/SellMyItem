@@ -15,8 +15,14 @@ const listings = [
   {
     id: 2,
     title: '4 Seat Sofa looks good',
-    price: 1000,
+    price: 400,
     image: require('../assets/couch.jpg'),
+  },
+  {
+    id: 3,
+    title: 'Beds just 3 months old',
+    price: 250,
+    image: require('../assets/bed.jpg'),
   },
 ];
 
