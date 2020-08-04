@@ -7,13 +7,13 @@ import { ListItem, ListItemDeleteAction, ListItemSeparator } from '../components
 const initialMessages = [
   {
     id: 1,
-    title: 'Vipan Preet',
+    title: 'Vipanpreet',
     description: 'Hey! Is this item still available?',
     image: require('../assets/user.jpg'),
   },
   {
     id: 2,
-    title: 'Vipan Preet',
+    title: 'Vipanpreet',
     description: "I'm interested in this item. When will you be able to post it?",
     image: require('../assets/user.jpg'),
   },

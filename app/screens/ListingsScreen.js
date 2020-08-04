@@ -1,57 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import listingsAPI from '../api/listingsAPI';
 
 import ActivityIndicator from '../components/ActivityIndicator';
+import Button from '../components/Button';
 import Card from '../components/Card';
 import colors from '../config/colors';
+import listingsApi from '../api/listings';
+import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 import AppText from '../components/Text';
-import Button from '../components/Button';
+import useApi from '../hooks/useApi';
 
 function ListingsScreen({ navigation }) {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const getListingsApi = useApi(listingsApi.getListings);
 
   useEffect(() => {
-    getListing();
+    getListingsApi.request();
   }, []);
 
-  const getListing = async () => {
-    try {
-      setIsLoading(true);
-      const response = await listingsAPI.fetchLists();
-      setError(false);
-      setIsLoading(false);
-
-      setListings(response.data);
-    } catch (error) {
-      if (!error.response || error.code === 'ECONNABORTED') {
-        return setError(true);
-      }
-    }
-  };
   return (
     <Screen style={styles.screen}>
-      {error === true && (
+      {getListingsApi.error && (
         <>
-          <AppText style={{ textAlign: 'center' }}>
-            There is an problem with network
-          </AppText>
-          <Button title='Retry' onPress={getListing} />
+          <AppText>Couldn't retrieve the listings.</AppText>
+          <Button title='Retry' onPress={getListingsApi.request} />
         </>
       )}
-      <ActivityIndicator visible={isLoading} />
+      <ActivityIndicator visible={getListingsApi.loading} />
       <FlatList
-        data={listings}
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing._id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
             subTitle={'$' + item.price}
             imageUrl={item.images[0].url}
-            onPress={() => navigation.navigate('ListingDetails', item)}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            thumbnailUrl={item.images[0].thumbnailUrl}
           />
         )}
       />
