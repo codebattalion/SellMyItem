@@ -3,10 +3,12 @@ import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 import * as Location from 'expo-location';
 
+import listingsAPI from '../api/listingsAPI';
 import { Form, FormField, FormPicker as Picker, SubmitButton } from '../components/forms';
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import Screen from '../components/Screen';
 import FormImagePicker from '../components/forms/FormImagePicker';
+import UploadScreen from './UploadScreen';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label('Title'),
@@ -75,6 +77,8 @@ const categories = [
 
 function ListingEditScreen() {
   const [location, setLocation] = useState();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync();
@@ -89,8 +93,21 @@ function ListingEditScreen() {
     getLocation();
   }, []);
 
+  // handle Submit
+  const onSubmit = async (listing) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await listingsAPI.addList({ ...listing, location }, (progress) =>
+      setProgress(progress)
+    );
+  };
   return (
     <Screen style={styles.container}>
+      <UploadScreen
+        onDone={() => setUploadVisible(false)}
+        progress={progress}
+        visible={uploadVisible}
+      />
       <Form
         initialValues={{
           title: '',
@@ -99,7 +116,7 @@ function ListingEditScreen() {
           category: null,
           images: [],
         }}
-        onSubmit={(values) => console.log(location)}
+        onSubmit={(values) => onSubmit(values)}
         validationSchema={validationSchema}
       >
         <FormImagePicker name='images' />
@@ -109,7 +126,6 @@ function ListingEditScreen() {
           maxLength={8}
           name='price'
           placeholder='Price'
-          width={180}
         />
         <Picker
           items={categories}
