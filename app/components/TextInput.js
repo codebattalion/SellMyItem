@@ -1,10 +1,11 @@
-import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import defaultStyles from "../config/styles";
+import defaultStyles from '../config/styles';
+import colors from '../config/colors';
 
-function AppTextInput({ icon, width = "100%", ...otherProps }) {
+function AppTextInput({ icon, width = '100%', ...otherProps }) {
   return (
     <View style={[styles.container, { width }]}>
       {icon && (
@@ -15,6 +16,7 @@ function AppTextInput({ icon, width = "100%", ...otherProps }) {
           style={styles.icon}
         />
       )}
+
       <TextInput
         placeholderTextColor={defaultStyles.colors.medium}
         style={defaultStyles.text}
@@ -26,10 +28,11 @@ function AppTextInput({ icon, width = "100%", ...otherProps }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: defaultStyles.colors.light,
-    borderRadius: 25,
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 15,
+    borderColor: '#fff',
+    borderBottomColor: colors.primary,
+    borderWidth: 1,
     marginVertical: 10,
   },
   icon: {
