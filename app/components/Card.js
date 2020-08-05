@@ -7,6 +7,11 @@ import colors from '../config/colors';
 
 function Card({ title, subTitle, imageUrl, onPress, desc, thumbnailUrl }) {
   var descnew = desc.substring(0, 36) + '..';
+  subTitle = subTitle.toString();
+  var lastThree = subTitle.substring(subTitle.length - 3);
+  var otherNumbers = subTitle.substring(0, subTitle.length - 3);
+  if (otherNumbers != '') lastThree = ',' + lastThree;
+  var price = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThree;
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
@@ -21,7 +26,7 @@ function Card({ title, subTitle, imageUrl, onPress, desc, thumbnailUrl }) {
             {title}
           </Text>
           <Text style={styles.subTitle} numberOfLines={2}>
-            {subTitle}
+            {price}
           </Text>
           <Text style={styles.desc} numberOfLines={2}>
             {descnew}
