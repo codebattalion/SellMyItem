@@ -12,7 +12,7 @@ export const addListing = (listing, onUploadProgress) => {
   data.append('description', listing.description);
 
   listing.images.forEach((image, index) =>
-    data.append('images', {
+    data.append('image', {
       name: 'image' + index,
       type: 'image/jpeg',
       uri: image,

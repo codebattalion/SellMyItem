@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Platform } from 'react-native';
 
 import AccountNavigator from './AccountNavigator';
 import FeedNavigator from './FeedNavigator';
@@ -11,7 +12,14 @@ import routes from './routes';
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
-  <Tab.Navigator>
+  <Tab.Navigator
+    tabBarOptions={{
+      style: {
+        paddingBottom: 20,
+        height: Platform.OS === 'android' ? 100 : 80,
+      },
+    }}
+  >
     <Tab.Screen
       name='Feed'
       component={FeedNavigator}

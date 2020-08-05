@@ -3,6 +3,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import jwtDecode from 'jwt-decode';
 import { AppLoading } from 'expo';
 
+import OfflineNotice from './app/components/OfflineNotice';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
@@ -24,6 +25,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
+      <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
